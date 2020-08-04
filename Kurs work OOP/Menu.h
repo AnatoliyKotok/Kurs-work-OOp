@@ -36,6 +36,8 @@ public:
 					cout << "1.Add comp" << endl;
 					cout << "2.Print comp" << endl;
 					cout << "3.Found comp" << endl;
+					cout << "4.Redact comp" << endl;
+					cout << "5.Exit" << endl;
 					cout << "Select action->";
 					cin >> a;
 					system("cls");
@@ -55,8 +57,11 @@ public:
 					case 3:
 						cd.foundComp();
 						break;
+					case 4:
+						cd.redactComp();
+						break;
 					}
-				} while (a != 4);
+				} while (a != 5);
 				break;
 			case 2:
 				int l;
@@ -64,6 +69,8 @@ public:
 					cout << "1.Add laptop" << endl;
 					cout << "2.Print laptop" << endl;
 					cout << "3.Found laptop" << endl;
+					cout << "4.Redact laptop" << endl;
+					cout << "5.Exit" << endl;
 					cout << "Select action->";
 					cin >> l;
 					system("cls");
@@ -83,14 +90,19 @@ public:
 					case 3:
 						cd.foundLaptop();
 						break;
+					case 4:
+						cd.redactLaptop();
+						break;
 					}
-				} while (l != 4);
+				} while (l != 5);
 			case 3:
 				int p;
 				do {
 					cout << "1.Add printer" << endl;
 					cout << "2.Print printer" << endl;
 					cout << "3.Found printer" << endl;
+					cout << "4.Redact printer" << endl;
+					cout << "5.Exit" << endl;
 					cout << "Select action->";
 					cin >> p;
 					system("cls");
@@ -110,8 +122,11 @@ public:
 					case 3:
 						cd.foundPrinters();
 						break;
+					case 4:
+						cd.redactPrinter();
+						break;
 					}
-				} while (p != 4);
+				} while (p != 5);
 			case 4:
 				cd.printAll();
 				break;

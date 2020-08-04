@@ -3,6 +3,8 @@
 #include<string>
 #include<list>
 #include<fstream>
+#include<ctime>
+#include<windows.h>
 using namespace std;
 const string fname= "Comp.txt";
 const string flaptop = "Laptop.txt";
@@ -18,6 +20,7 @@ public:
 	string characteristic;
 	double priceUSD;
 	double priceUAH;
+	size_t id;
 	size_t CountInStock;
 	friend ostream& operator<<(ostream& out, const Item& comp);
 	friend istream& operator>>(istream& in, Item& comp);
@@ -27,11 +30,13 @@ public:
 		cout << "Count in stock->" << CountInStock << endl;
 		cout << "Mark->" << name << endl;
 		cout << "Characteristic->" << characteristic << endl;
+		cout << "ID->" << id << endl;
 		cout << endl;
 	}
+	
 };
 ostream& operator<<(ostream& out,const Item&comp) {
-	out << comp.priceUSD << "\n" << comp.priceUAH << "\n" << comp.CountInStock << "\n" << comp.name << "\n" << comp.characteristic << endl;
+	out << comp.priceUSD << "\n" << comp.priceUAH << "\n" << comp.CountInStock << "\n" << comp.name << "\n" << comp.characteristic <<"\n"<<comp.id <<endl;
 	return out;
 }
  istream& operator>>(istream& in, Item& comp)
@@ -41,6 +46,7 @@ ostream& operator<<(ostream& out,const Item&comp) {
 	in >> comp.CountInStock;
 	in >> comp.name;
 	in >> comp.characteristic;
+	in >> comp.id;
 	return in;
 }
 class Computer :public Item, public Rate {
@@ -60,6 +66,7 @@ class ComputerDepartment:public Rate {
 public:
 	void addComp() {
 		Computer comp;
+		size_t id;
 		cout << "Enter price in USD->";
 		do {
 			cin >> comp.priceUSD;
@@ -73,6 +80,16 @@ public:
 		cout << "Enter characteristic->";
 		cin.ignore(cin.rdbuf()->in_avail());
 		getline(cin, comp.characteristic);
+		agin:
+		cout << "Enter id->";
+		cin >> id;
+		for (auto it : comps) {
+			if (id == it.id) {
+				goto agin;
+				break;
+			}
+		}
+		comp.id = id;
 		comps.push_back(comp);
 		ofstream fout;
 		fout.open(fname, ios::app);
@@ -109,6 +126,7 @@ public:
 	}
 	void addLaptop() {
 		Laptop laptop;
+		size_t id;
 		cout << "Enter price in USD->";
 		do {
 			cin >> laptop.priceUSD;
@@ -122,6 +140,16 @@ public:
 		cout << "Enter characteristic->";
 		cin.ignore(cin.rdbuf()->in_avail());
 		getline(cin, laptop.characteristic);
+	agin:
+		cout << "Enter id->";
+		cin >> id;
+		for (auto it : laptops) {
+			if (id == it.id) {
+				goto agin;
+				break;
+			}
+		}
+		laptop.id = id;
 		laptops.push_back(laptop);
 		ofstream fout;
 		fout.open(flaptop, ios::app);
@@ -158,6 +186,7 @@ public:
 	}
 	void addPrinter() {
 		Printer printer;
+		size_t id;
 		cout << "Enter price in USD->";
 		do {
 			cin >> printer.priceUSD;
@@ -171,6 +200,16 @@ public:
 		cout << "Enter characteristic->";
 		cin.ignore(cin.rdbuf()->in_avail());
 		getline(cin, printer.characteristic);
+	agin:
+		cout << "Enter id->";
+		cin >> id;
+		for (auto it : printers) {
+			if (id == it.id) {
+				goto agin;
+				break;
+			}
+		}
+		printer.id = id;
 		printers.push_back(printer);
 		ofstream fout;
 		fout.open(fprint, ios::app);
@@ -228,7 +267,7 @@ public:
 		cin >> maxPrice;
 		bool found = false;
 		for (auto it = comps.begin(); it != comps.end(); it++) {
-			if (name == it->name && minPrice == it->priceUSD||maxPrice==it->priceUSD) {
+			if (name == it->name && minPrice <= it->priceUSD&&maxPrice<=it->priceUSD) {
 				    it->print();
 					found = true;
 				
@@ -251,7 +290,7 @@ public:
 		cin >> maxPrice;
 		bool found = false;
 		for (auto it = laptops.begin(); it != laptops.end(); it++) {
-			if (name == it->name && minPrice == it->priceUSD || maxPrice == it->priceUSD) {
+			if (name == it->name && minPrice <= it->priceUSD &&maxPrice <= it->priceUSD) {
 				it->print();
 				found = true;
 
@@ -274,7 +313,7 @@ public:
 		cin >> maxPrice;
 		bool found = false;
 		for (auto it = printers.begin(); it != printers.end(); it++) {
-			if (name == it->name && minPrice == it->priceUSD || maxPrice == it->priceUSD) {
+			if (name == it->name && minPrice <= it->priceUSD && maxPrice <= it->priceUSD) {
 				it->print();
 				found = true;
 
@@ -282,7 +321,64 @@ public:
 		}
 		if (found == false) {
 			cout << "Serch result:0" << endl;
+			Sleep(1100);
+			system("cls");
 		}
 	}
+	void redactComp() {
+		size_t id;
+		Computer newcomp;
+		int action;
+		bool found = false;
+		cout << "Enter id comp for redact->";
+		cin >> id;
+        for (auto it = comps.begin(); it != comps.end(); it++) {
+			if (id == it->id) {
+				found == true;
+				do {
+					it->print();
+					cout << "1.Redact price" << endl;
+					cout << "2.Redact count" << endl;
+					cout << "3.Redact characteristic" << endl;
+					cout << "4.Exit" << endl;
+					cout << "Select action->";
+					cin >> action;
+					system("cls");
+					switch (action) {
+					case 1:
 
+						cout << "Enter new price->";
+						do {
+							cin >> newcomp.priceUSD;
+						} while (newcomp.priceUSD <= 0);
+						it->priceUSD = newcomp.priceUSD;
+						it->priceUAH = it->priceUSD * rate;
+
+						break;
+					case 2:
+						cout << "Enter new count on the stock->";
+						cin >> newcomp.CountInStock;
+						it->CountInStock = newcomp.CountInStock;
+						break;
+					case 3:
+						cout << "Enter new characteristic->";
+						cin.ignore(cin.rdbuf()->in_avail());
+						getline(cin, newcomp.characteristic);
+						it->characteristic = newcomp.characteristic;
+
+						break;
+					}
+				} while (action != 4);
+				break;
+			}
+			if (found == false) {
+				cout << "Comp not found" << endl;
+				Sleep(1000);
+				system("cls");
+				return;
+			}
+		}
+	}
+	void redactLaptop();
+	void redactPrinter();
 };

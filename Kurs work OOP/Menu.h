@@ -1,9 +1,4 @@
 #pragma once
-#include<iostream>
-#include<string>
-#include<list>
-#include<fstream>
-#include<ctime>
 #include"Computer.h"
 using namespace std;
 
@@ -25,6 +20,8 @@ public:
 			cout << "2.Laptop" << endl;
 			cout << "3.Printer" << endl;
 			cout << "4.Print all" << endl;
+			cout << "5.Sample" << endl;
+			cout << "6.Exit" << endl;
 			cout << "Select action->";
 			cin >> action;
 			system("cls");
@@ -37,7 +34,8 @@ public:
 					cout << "2.Print comp" << endl;
 					cout << "3.Found comp" << endl;
 					cout << "4.Redact comp" << endl;
-					cout << "5.Exit" << endl;
+					cout << "5.Delete comp" << endl;
+					cout << "6.Exit" << endl;
 					cout << "Select action->";
 					cin >> a;
 					system("cls");
@@ -60,8 +58,11 @@ public:
 					case 4:
 						cd.redactComp();
 						break;
-					}
-				} while (a != 5);
+					case 5:
+						cd.delComp();
+						break;
+                    }
+				} while (a != 6);
 				break;
 			case 2:
 				int l;
@@ -70,7 +71,8 @@ public:
 					cout << "2.Print laptop" << endl;
 					cout << "3.Found laptop" << endl;
 					cout << "4.Redact laptop" << endl;
-					cout << "5.Exit" << endl;
+					cout << "5.Delete laptop" << endl;
+					cout << "6.Exit" << endl;
 					cout << "Select action->";
 					cin >> l;
 					system("cls");
@@ -93,8 +95,13 @@ public:
 					case 4:
 						cd.redactLaptop();
 						break;
+					case 5:
+						cd.delLaptop();
+						break;
+					
 					}
-				} while (l != 5);
+				} while (l != 6);
+				break;
 			case 3:
 				int p;
 				do {
@@ -102,7 +109,8 @@ public:
 					cout << "2.Print printer" << endl;
 					cout << "3.Found printer" << endl;
 					cout << "4.Redact printer" << endl;
-					cout << "5.Exit" << endl;
+					cout << "5.Delete printer" << endl;
+					cout << "6.Exit" << endl;
 					cout << "Select action->";
 					cin >> p;
 					system("cls");
@@ -125,13 +133,20 @@ public:
 					case 4:
 						cd.redactPrinter();
 						break;
+					case 5:
+						cd.delPrinter();
+						break;
 					}
-				} while (p != 5);
+				} while (p != 6);
+				break;
 			case 4:
 				cd.printAll();
 				break;
+			case 5:
+				cd.Sample();
+				break;
 			
 			}
-		} while (action != 5);
+		} while (action != 6);
 	}
 };

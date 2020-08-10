@@ -1,3 +1,8 @@
 ﻿  Source.cpp
-C:\Users\Anatoliy\source\repos\Kurs work OOP\Kurs work OOP\Computer.h(335,11): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\Anatoliy\source\repos\Kurs work OOP\Kurs work OOP\Computer.h(339,11): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\Anatoliy\source\repos\Kurs work OOP\Kurs work OOP\Computer.h(396,11): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\Anatoliy\source\repos\Kurs work OOP\Kurs work OOP\Computer.h(453,11): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\Anatoliy\source\repos\Kurs work OOP\Kurs work OOP\Computer.h(569,50): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\Anatoliy\source\repos\Kurs work OOP\Kurs work OOP\Computer.h(574,53): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\Anatoliy\source\repos\Kurs work OOP\Kurs work OOP\Computer.h(579,53): warning C4018: '<=': signed/unsigned mismatch
   Kurs work OOP.vcxproj -> C:\Users\Anatoliy\source\repos\Kurs work OOP\Debug\Kurs work OOP.exe

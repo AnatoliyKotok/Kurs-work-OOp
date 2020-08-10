@@ -267,7 +267,7 @@ public:
 		cin >> maxPrice;
 		bool found = false;
 		for (auto it = comps.begin(); it != comps.end(); it++) {
-			if (name == it->name && minPrice <= it->priceUSD&&maxPrice<=it->priceUSD) {
+			if (name == it->name && minPrice <= it->priceUSD&&maxPrice>=it->priceUSD) {
 				    it->print();
 					found = true;
 				
@@ -281,7 +281,7 @@ public:
 		double minPrice = 0;
 		double maxPrice = 0;
 		string name;
-		cout << "Enter mark comp->";
+		cout << "Enter mark laptop->";
 		cin.ignore(cin.rdbuf()->in_avail());
 		getline(cin, name);
 		cout << "Price from->";
@@ -290,7 +290,7 @@ public:
 		cin >> maxPrice;
 		bool found = false;
 		for (auto it = laptops.begin(); it != laptops.end(); it++) {
-			if (name == it->name && minPrice <= it->priceUSD &&maxPrice <= it->priceUSD) {
+			if (name == it->name && minPrice <= it->priceUSD &&maxPrice >= it->priceUSD) {
 				it->print();
 				found = true;
 
@@ -304,7 +304,7 @@ public:
 		double minPrice = 0;
 		double maxPrice = 0;
 		string name;
-		cout << "Enter mark comp->";
+		cout << "Enter mark print->";
 		cin.ignore(cin.rdbuf()->in_avail());
 		getline(cin, name);
 		cout << "Price from->";
@@ -313,7 +313,7 @@ public:
 		cin >> maxPrice;
 		bool found = false;
 		for (auto it = printers.begin(); it != printers.end(); it++) {
-			if (name == it->name && minPrice <= it->priceUSD && maxPrice <= it->priceUSD) {
+			if (name == it->name && minPrice <= it->priceUSD && maxPrice >= it->priceUSD) {
 				it->print();
 				found = true;
 
@@ -326,13 +326,72 @@ public:
 		}
 	}
 	void redactComp() {
+		size_t idc;
+		double price;
+		size_t count;
+		string characteristic;
+		int action;
+		bool found = false;
+		cout << "Enter id comp for redact->";
+		cin >> idc;
+        for (auto it = comps.begin(); it != comps.end(); it++) {
+			if (idc == it->id) {
+				found == true;
+				do {
+					it->print();
+					cout << "1.Redact price" << endl;
+					cout << "2.Redact count" << endl;
+					cout << "3.Redact characteristic" << endl;
+					cout << "4.Exit" << endl;
+					cout << "Select action->";
+					cin >> action;
+					system("cls");
+					switch (action) {
+					case 1:
+
+						cout << "Enter new price->";
+						do {
+							cin >> price;
+						} while (price <= 0);
+							it->priceUSD = price;
+						it->priceUAH = it->priceUSD * rate;
+
+						break;
+					case 2:
+						cout << "Enter new count on the stock->";
+						cin >> count;
+						it->CountInStock = count;
+						break;
+					case 3:
+						cout << "Enter new characteristic->";
+						cin.ignore(cin.rdbuf()->in_avail());
+						getline(cin, characteristic);
+						it->characteristic =characteristic;
+
+						break;
+					}
+				} while (action != 4);
+				break;
+			}
+			if (found == false) {
+				cout << "Comp not found" << endl;
+				Sleep(1000);
+				system("cls");
+				return;
+			}
+		}
+	}
+	void redactLaptop()
+	{
 		size_t id;
-		Computer newcomp;
+		double price;
+		size_t count;
+		string characteristic;
 		int action;
 		bool found = false;
 		cout << "Enter id comp for redact->";
 		cin >> id;
-        for (auto it = comps.begin(); it != comps.end(); it++) {
+		for (auto it = laptops.begin(); it != laptops.end(); it++) {
 			if (id == it->id) {
 				found == true;
 				do {
@@ -349,22 +408,22 @@ public:
 
 						cout << "Enter new price->";
 						do {
-							cin >> newcomp.priceUSD;
-						} while (newcomp.priceUSD <= 0);
-						it->priceUSD = newcomp.priceUSD;
+							cin >> price;
+						} while (price <= 0);
+						it->priceUSD = price;
 						it->priceUAH = it->priceUSD * rate;
 
 						break;
 					case 2:
 						cout << "Enter new count on the stock->";
-						cin >> newcomp.CountInStock;
-						it->CountInStock = newcomp.CountInStock;
+						cin >> count;
+						it->CountInStock = count;
 						break;
 					case 3:
 						cout << "Enter new characteristic->";
 						cin.ignore(cin.rdbuf()->in_avail());
-						getline(cin, newcomp.characteristic);
-						it->characteristic = newcomp.characteristic;
+						getline(cin, characteristic);
+						it->characteristic = characteristic;
 
 						break;
 					}
@@ -372,13 +431,154 @@ public:
 				break;
 			}
 			if (found == false) {
-				cout << "Comp not found" << endl;
+				cout << "Laptop not found" << endl;
 				Sleep(1000);
 				system("cls");
 				return;
 			}
 		}
 	}
-	void redactLaptop();
-	void redactPrinter();
+	void redactPrinter()
+	{
+		size_t id;
+		double price;
+		size_t count;
+		string characteristic;
+		int action;
+		bool found = false;
+		cout << "Enter id comp for redact->";
+		cin >> id;
+		for (auto it = printers.begin(); it != printers.end(); it++) {
+			if (id == it->id) {
+				found == true;
+				do {
+					it->print();
+					cout << "1.Redact price" << endl;
+					cout << "2.Redact count" << endl;
+					cout << "3.Redact characteristic" << endl;
+					cout << "4.Exit" << endl;
+					cout << "Select action->";
+					cin >> action;
+					system("cls");
+					switch (action) {
+					case 1:
+
+						cout << "Enter new price->";
+						do {
+							cin >> price;
+						} while (price <= 0);
+						it->priceUSD = price;
+						it->priceUAH = it->priceUSD * rate;
+
+						break;
+					case 2:
+						cout << "Enter new count on the stock->";
+						cin >> count;
+						it->CountInStock = count;
+						break;
+					case 3:
+						cout << "Enter new characteristic->";
+						cin.ignore(cin.rdbuf()->in_avail());
+						getline(cin, characteristic);
+						it->characteristic = characteristic;
+
+						break;
+					}
+				} while (action != 4);
+				break;
+			}
+			if (found == false) {
+				cout << "Printer not found" << endl;
+				Sleep(1000);
+				system("cls");
+				return;
+			}
+		}
+	}
+	void delComp() {
+		size_t id;
+		bool found=false;
+		cout << "Enter comp id for delete it->";
+		cin >> id;
+		for (auto it = comps.begin(); it != comps.end(); it++) {
+			if (id == it->id) {
+				found = true;
+				comps.erase(it);
+				cout << "Comp was deleted sucsesful" << endl;
+				Sleep(1200);
+				system("cls");
+				return;
+			}
+		}
+		if (found == false) {
+			cout << "Comp with this id not found" << endl;
+			Sleep(1200);
+			system("cls");
+			return;
+		}
+	}
+	void delLaptop() {
+		size_t id;
+		bool found = false;
+		cout << "Enter comp id for delete it->";
+		cin >> id;
+		for (auto it = laptops.begin(); it != laptops.end(); it++) {
+			if (id == it->id) {
+				found = true;
+				laptops.erase(it);
+				cout << "Laptop was deleted sucsesful" << endl;
+				Sleep(1200);
+				system("cls");
+				return;
+			}
+		}
+		if (found == false) {
+			cout << "Laptop with this id not found" << endl;
+			Sleep(1200);
+			system("cls");
+			return;
+		}
+	}
+	void delPrinter() {
+		size_t id;
+		bool found = false;
+		cout << "Enter comp id for delete it->";
+		cin >> id;
+		for (auto it = printers.begin(); it != printers.end(); it++) {
+			if (id == it->id) {
+				found = true;
+				printers.erase(it);
+				cout << "Priner was deleted sucsesful" << endl;
+				Sleep(1200);
+				system("cls");
+				return;
+			}
+		}
+		if (found == false) {
+			cout << "Printer with this id not found" << endl;
+			Sleep(1200);
+			system("cls");
+			return;
+		}
+	}
+	void Sample() {
+		cout << "Goods whose price is less than 300 or which is lass than 5 pieces" << endl;
+		int maxPrice=300;
+		int minCount = 5;
+		for (auto it = comps.begin(); it != comps.end(); it++) {
+			if (it->priceUSD <= maxPrice||it->CountInStock<=minCount) {
+				it->print();
+			}
+		}
+		for (auto it = laptops.begin(); it != laptops.end(); it++) {
+			if (it->priceUSD <= maxPrice || it->CountInStock <= minCount) {
+				it->print();
+			}
+		}
+		for (auto it = printers.begin(); it != printers.end(); it++) {
+			if (it->priceUSD <= maxPrice || it->CountInStock <= minCount) {
+				it->print();
+			}
+		}
+	}
 };

@@ -9,6 +9,7 @@ using namespace std;
 const string fname= "Comp.txt";
 const string flaptop = "Laptop.txt";
 const string fprint = "Print.txt";
+double yourMoney = 0;
 class Rate {
 protected:
 	double rate = 27.50;
@@ -59,7 +60,8 @@ class Laptop:public Item,public Rate
 class Printer :public Item, public Rate {
 
 };
-class ComputerDepartment:public Rate {
+class ComputerDepartment:public Rate{
+protected:
 	list<Computer>comps;
 	list<Laptop>laptops;
 	list<Printer>printers;
@@ -581,4 +583,235 @@ public:
 			}
 		}
 	}
+	void putMoney() {
+		cout << "Put money on your accaunt->";
+		double money;
+		cin >> money;
+		yourMoney = money;
+	}
+	void buyComp(){
+		foundComp();
+		size_t id;
+		cout << "Enter comp id for buy it->";
+		cin >> id;
+		cout << "Enter count comp what you want buy->";
+		size_t count;
+		cin >> count;
+		bool fid = false;
+		bool fcount = false;
+		bool fmoney = false;
+		for (auto it = comps.begin(); it != comps.end(); it++) {
+			if (id == it->id) {
+				fid = true;
+				if (count <= it->CountInStock) {
+					fcount = true;
+					double price = count * it->priceUSD;
+					if (yourMoney >= price) {
+						fmoney = true;
+						it->CountInStock -= count;
+						yourMoney -= price;
+						if (it->CountInStock == 0) {
+							comps.erase(it);
+							return;
+						}
+					}
+				}
+				break;
+			}
+		}
+		if (fid == false) {
+			cout << "Incorect id" << endl;
+			Sleep(1300);
+			system("cls");
+		}
+		if (fcount == false) {
+			cout << "No enough computers" << endl;
+			Sleep(1300);
+			system("cls");
+		}
+		if (fmoney == false) {
+			cout << "No enough money" << endl;
+			Sleep(1300);
+			system("cls");
+		}
+	}
+	void buyLaptop(){
+		foundLaptop();
+		size_t id;
+		cout << "Enter laptop id for buy it->";
+		cin >> id;
+		cout << "Enter count laptops what you want buy->";
+		size_t count;
+		cin >> count;
+		bool fid = false;
+		bool fcount = false;
+		bool fmoney = false;
+		for (auto it = laptops.begin(); it != laptops.end(); it++) {
+			if (id == it->id) {
+				fid = true;
+				if (count <= it->CountInStock) {
+					fcount = true;
+					double price = count * it->priceUSD;
+					if (yourMoney >= price) {
+						fmoney = true;
+						it->CountInStock -= count;
+						yourMoney -= price;
+						if (it->CountInStock == 0) {
+							laptops.erase(it);
+							return;
+						}
+					}
+				}
+				break;
+			}
+		}
+		if (fid == false) {
+			cout << "Incorect id" << endl;
+			Sleep(1300);
+			system("cls");
+		}
+		if (fcount == false) {
+			cout << "No enough laptops" << endl;
+			Sleep(1300);
+			system("cls");
+		}
+		if (fmoney == false) {
+			cout << "No enough money" << endl;
+			Sleep(1300);
+			system("cls");
+		}
+	}
+	void buyPrinter() {
+		foundPrinters();
+		size_t id;
+		cout << "Enter printer id for buy it->";
+		cin >> id;
+		cout << "Enter count printers what you want buy->";
+		size_t count;
+		cin >> count;
+		bool fid = false;
+		bool fcount = false;
+		bool fmoney = false;
+		for (auto it = printers.begin(); it != printers.end(); it++) {
+			if (id == it->id) {
+				fid = true;
+				if (count <= it->CountInStock) {
+					fcount = true;
+					double price = count * it->priceUSD;
+					if (yourMoney >= price) {
+						fmoney = true;
+						it->CountInStock -= count;
+						yourMoney -= price;
+						if (it->CountInStock == 0) {
+							printers.erase(it);
+							return;
+						}
+					}
+				}
+				break;
+			}
+		}
+		if (fid == false) {
+			cout << "Incorect id" << endl;
+			Sleep(1300);
+			system("cls");
+		}
+		if (fcount == false) {
+			cout << "No enough printers" << endl;
+			Sleep(1300);
+			system("cls");
+		}
+		if (fmoney == false) {
+			cout << "No enough money" << endl;
+			Sleep(1300);
+			system("cls");
+		}
+	}
+	void manuComp() {
+		int action;
+		do {
+			cout << "Money->" << yourMoney << endl;
+			cout << "1.Buy comp" << endl;
+			cout << "2.Found comp" << endl;
+			cout << "3.Print comp" << endl;
+			cout << "4.Put money on account" << endl;
+			cout << "5.Main manu" << endl;
+			cout << "Select action->";
+			cin >> action; system("cls");
+			switch (action) {
+			case 1:
+				buyComp();
+				break;
+			case 2:
+				foundComp();
+				break;
+			case 3:
+				printComp();
+				break;
+			case 4:
+				putMoney();
+				break;
+			}
+		} while (action != 5);
+
+	}
+	void manuLaptop() {
+		int action;
+		do {
+			cout << "Money->" << yourMoney << endl;
+			cout << "1.Buy laptop" << endl;
+			cout << "2.Found laptop" << endl;
+			cout << "3.Print laptop" << endl;
+			cout << "4.Put money on account" << endl;
+			cout << "5.Main manu" << endl;
+			cout << "Select action->";
+			cin >> action; system("cls");
+			switch (action) {
+			case 1:
+				buyLaptop();
+				break;
+			case 2:
+				foundLaptop();
+				break;
+			case 3:
+				printLaptop();
+				break;
+			case 4:
+				putMoney();
+				break;
+			}
+		} while (action != 5);
+
+	}
+	void manuPrinter() {
+		int action;
+		do {
+			cout << "Money->" << yourMoney << endl;
+			cout << "1.Buy printer" << endl;
+			cout << "2.Found printer" << endl;
+			cout << "3.Print printer" << endl;
+			cout << "4.Put money on account" << endl;
+			cout << "5.Main manu" << endl;
+			cout << "Select action->";
+			cin >> action; system("cls");
+			switch (action) {
+			case 1:
+				buyPrinter();
+				break;
+			case 2:
+				foundPrinters();
+				break;
+			case 3:
+				printPrinter();
+				break;
+			case 4:
+				putMoney();
+				break;
+			}
+		} while (action != 5);
+
+	}
 };
+
+
+

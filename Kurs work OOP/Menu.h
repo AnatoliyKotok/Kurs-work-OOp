@@ -3,18 +3,11 @@
 using namespace std;
 
 class Menu {
-	ComputerDepartment cd;
+    ComputerDepartment cd;
 	int action;
 public:
-	void manu() {
-		/*try {
-			cd.readComp();
-			cd.readLaptop();
-			cd.readPrinter();
-		}
-		catch (exception & ex) {
-			cout << ex.what() << endl;
-		}*/
+	void AdminManu() {
+		
 		do {
 			cout << "1.Comp" << endl;
 			cout << "2.Laptop" << endl;
@@ -61,7 +54,7 @@ public:
 					case 5:
 						cd.delComp();
 						break;
-                    }
+					}
 				} while (a != 6);
 				break;
 			case 2:
@@ -98,7 +91,7 @@ public:
 					case 5:
 						cd.delLaptop();
 						break;
-					
+
 					}
 				} while (l != 6);
 				break;
@@ -145,8 +138,32 @@ public:
 			case 5:
 				cd.Sample();
 				break;
-			
+
 			}
 		} while (action != 6);
+	}
+	void UserMenu() {
+		int action;
+		do {
+			cout << "1.Comp" << endl;
+			cout << "2.Laptop" << endl;
+			cout << "3.Printer" << endl;
+			cout << "4.Exit" << endl;
+			cout << "Select section->";
+			cin >> action;
+			system("cls");
+			switch (action) {
+			case 1:
+				cd.manuComp();
+				break;
+			case 2:
+				cd.manuLaptop();
+				break;
+			case 3:
+				cd.manuPrinter();
+				break;
+			}
+		} while (action != 4);
+		
 	}
 };
